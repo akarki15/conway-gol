@@ -1,0 +1,6 @@
+[package]
+name = "conway-gol"
+version = "0.1.0"
+authors = ["Aashish Karki <aashish@clypd.com>"]
+
+[dependencies]
