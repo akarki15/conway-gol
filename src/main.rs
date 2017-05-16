@@ -1,4 +1,5 @@
 use std::fmt;
+use piston_window::*;
 
 struct Cell {
     alive: bool,
@@ -15,28 +16,16 @@ impl fmt::Display for Cell {
 }
 
 fn main() {
-    let mut grid = Vec::new();
-    for i in 1..10 {
-        let mut row = Vec::new();
-        for i in 1..10 {
-            let c: Cell = Cell { alive: false };
-            row.push(c);
-        }
-        grid.push(row);
-    }
-    //oscillator
-    //grid[1][1].alive = true;
-    //grid[2][1].alive = true;
-    //grid[3][1].alive = true;
-    grid[0][1].alive = true;
-    grid[1][2].alive = true;
-    grid[2][0].alive = true;
-    grid[2][1].alive = true;
-    grid[2][2].alive = true;
-    print_grid(&grid);
-    for i in 1..15 {
-        grid = change_state(&grid);
-        print_grid(&grid);
+ let mut window: PistonWindow =
+        WindowSettings::new("Hello Piston!", [640, 480])
+        .exit_on_esc(true).build().unwrap();
+    while let Some(e) = window.next() {
+        window.draw_2d(&e, |c, g| {
+            clear([1.0; 4], g);
+            rectangle([1.0, 0.0, 0.0, 1.0], // red
+                      [0.0, 0.0, 100.0, 100.0],
+                      c.transform, g);
+        });
     }
 }
 
